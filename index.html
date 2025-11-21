@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WCP 3.0 Pro Weekly Digest</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                    },
+                    colors: {
+                        'gemini-blue': '#4E8CFF',
+                        'gemini-purple': '#9C4DCC',
+                        'wcp-dark': '#0F172A',
+                        'wcp-card': '#1E293B',
+                        'banana-yellow': '#FFE135',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #4E8CFF, #9C4DCC);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .scroll-hidden::-webkit-scrollbar {
+            display: none;
+        }
+        .scroll-hidden {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .banana-gradient {
+            background: linear-gradient(135deg, #FFE135 0%, #FFD700 100%);
+        }
+        /* Marquee Animation */
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .animate-marquee {
+            animation: marquee 20s linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-wcp-dark text-gray-100 font-sans antialiased selection:bg-gemini-purple selection:text-white pb-20">
+
+    <nav class="fixed top-0 w-full z-50 glass-panel border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-gemini-blue text-3xl">rocket_launch</span>
+                    <span class="font-black text-xl tracking-tighter">WCP <span class="gradient-text">3.0 Pro</span></span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#top" class="hover:text-gemini-blue px-3 py-2 rounded-md text-sm font-medium transition">Top</a>
+                        <a href="#tech" class="hover:text-gemini-blue px-3 py-2 rounded-md text-sm font-medium transition">Tech</a>
+                        <a href="#life" class="hover:text-gemini-blue px-3 py-2 rounded-md text-sm font-medium transition">Life</a>
+                        <a href="#schedule" class="bg-gemini-blue/20 text-gemini-blue px-3 py-2 rounded-md text-sm font-medium transition">Meetup Info</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="top" class="relative pt-24 pb-12 sm:pt-32 sm:pb-16 overflow-hidden">
+        <div class="absolute inset-0 z-0 opacity-30">
+            <img src="https://placehold.co/1200x600/0F172A/4E8CFF?text=Hero+Image" class="w-full h-full object-cover" alt="AI Background">
+            <div class="absolute inset-0 bg-gradient-to-b from-wcp-dark/50 via-wcp-dark/80 to-wcp-dark"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center px-4 py-2 rounded-full border border-gemini-purple/50 bg-gemini-purple/10 text-gemini-purple text-sm font-bold mb-6 animate-pulse-slow">
+                <span class="material-symbols-outlined text-base mr-2">radio_button_unchecked</span>
+                AI REVOLUTION WEEK
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black tracking-tight mb-6">
+                The Era of <br class="block md:hidden"><span class="gradient-text">Gemini 3.0</span> & <span class="text-banana-yellow">Nano Banana</span>
+            </h1>
+            <p class="mt-4 text-xl text-gray-400 max-w-3xl mx-auto">
+                今週のWCPは技術革新と個人的な痛みが交錯する激動の週でした。<br>
+                英検1級合格から脱毛の激痛まで、全てのハイライトをここに。
+            </p>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 mb-8 sticky top-20 z-40">
+        <div class="flex justify-center space-x-2 p-2 glass-panel rounded-xl w-fit mx-auto">
+            <button onclick="filterContent('all')" class="filter-btn active px-4 py-2 rounded-lg text-sm font-bold bg-white/10 hover:bg-white/20 transition bg-white/20 text-white">All</button>
+            <button onclick="filterContent('tech')" class="filter-btn px-4 py-2 rounded-lg text-sm font-bold hover:bg-gemini-blue/20 hover:text-gemini-blue transition">🤖 AI & Tech</button>
+            <button onclick="filterContent('life')" class="filter-btn px-4 py-2 rounded-lg text-sm font-bold hover:bg-pink-500/20 hover:text-pink-400 transition">💀 Life & Pain</button>
+            <button onclick="filterContent('music')" class="filter-btn px-4 py-2 rounded-lg text-sm font-bold hover:bg-green-500/20 hover:text-green-400 transition">🎵 Music</button>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="content-grid">
+            
+            <div class="content-card tech col-span-1 md:col-span-2 bg-wcp-card rounded-2xl overflow-hidden border border-white/5 shadow-xl group hover:border-gemini-blue/50 transition-all duration-300">
+                <div class="relative h-64 overflow-hidden">
+                    <img src="https://placehold.co/800x400/1E293B/4E8CFF?text=Gemini+Interface" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Gemini Interface">
+                    <div class="absolute top-4 left-4 bg-gemini-blue text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Main Topic</div>
+                </div>
+                <div class="p-6">
+                    <h2 class="text-2xl font-bold mb-2 flex items-center">
+                        <span class="material-symbols-outlined mr-2 text-gemini-purple">psychology</span>
+                        Gemini 3.0 vs OpenAI
+                    </h2>
+                    <p class="text-gray-400 mb-4">
+                        宮嵜・内山・高石がGemini 3.0 Proに完全移行の兆し。「過剰に否定しない後輩」から「的確なアドバイスをくれる相棒」へ進化。AntigravityなどのAI主導開発ツールも話題に。
+                    </p>
+                    <div class="bg-black/30 p-4 rounded-xl border border-white/5">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center text-xs">内</div>
+                            <div class="text-sm text-gray-300 italic">"資料作成、まじ仕事時間半分でいいじゃん。AIに仕事させて早めに集合で！"</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card life bg-gradient-to-br from-yellow-900/20 to-wcp-card rounded-2xl overflow-hidden border border-yellow-500/20 shadow-xl relative">
+                <div class="absolute top-0 right-0 p-4">
+                    <span class="material-symbols-outlined text-yellow-500 text-4xl">emoji_events</span>
+                </div>
+                <div class="p-6 pt-12">
+                    <div class="w-20 h-20 mx-auto mb-4 rounded-full overflow-hidden border-2 border-yellow-500">
+                         <img src="https://placehold.co/200x200/1E293B/F59E0B?text=Trophy" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-yellow-400 mb-1">川辺、英検1級合格</h3>
+                    <p class="text-center text-xs text-gray-500 mb-4">TOTAL COST: ¥50,000+</p>
+                    <p class="text-sm text-gray-300 text-center leading-relaxed">
+                        「謙虚になりましたね」「TOEIC満点より価値がある」<br>
+                        仕事後の1時間勉強＆1時間トレーニングの成果がついに実る。
+                    </p>
+                    <div class="mt-6 text-center">
+                        <span class="inline-block bg-yellow-500/20 text-yellow-300 text-xs px-2 py-1 rounded">Next: Podcast Debut?</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card music bg-wcp-card rounded-2xl overflow-hidden border border-white/5 shadow-xl">
+                <div class="relative h-48">
+                    <img src="https://placehold.co/600x400/1E293B/10B981?text=Skrillex" class="w-full h-full object-cover opacity-80" alt="Skrillex Boiler Room">
+                    <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-wcp-card to-transparent h-20"></div>
+                    <div class="absolute bottom-4 left-4">
+                        <h3 class="text-lg font-bold text-white">Skrillex Boiler Room</h3>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <p class="text-sm text-gray-400 mb-3">
+                        Skrillexから宮嵜にEPリリースのメールが届く（ファンメール）。Boiler Roomセットの話題で持ちきり。
+                    </p>
+                    <div class="flex space-x-2 overflow-x-auto scroll-hidden pb-2">
+                        <span class="flex-shrink-0 bg-green-500/10 text-green-400 text-xs px-3 py-1 rounded-full border border-green-500/20">Skrillex</span>
+                        <span class="flex-shrink-0 bg-green-500/10 text-green-400 text-xs px-3 py-1 rounded-full border border-green-500/20">Zedd (却下)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card tech bg-wcp-card rounded-2xl overflow-hidden border border-white/5 shadow-xl">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-banana-yellow">Nano Banana Pro</h3>
+                        <span class="material-symbols-outlined text-banana-yellow">image</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-4">
+                        画像生成AI「Nano Banana」を使った実験が多発。Skrillexのメンバー改変や、謎の「ゲイ盛」画像生成など、プロンプトエンジニアリングの極地へ。
+                    </p>
+                    <div class="bg-black/50 rounded-lg p-3 text-xs font-mono text-green-400">
+                        > generating...<br>
+                        > prompt: "肉食系 ゲイ盛"<br>
+                        > result: [REDACTED]
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card life bg-wcp-card rounded-2xl overflow-hidden border border-white/5 shadow-xl">
+                <div class="flex flex-row h-full">
+                    <div class="w-1/3 relative">
+                        <img src="https://placehold.co/300x300/1E293B/EC4899?text=Pain" class="w-full h-full object-cover" alt="Laser">
+                    </div>
+                    <div class="w-2/3 p-5 flex flex-col justify-center">
+                        <h3 class="text-lg font-bold text-pink-400 mb-1">鬱なら脱毛せよ</h3>
+                        <p class="text-xs text-gray-500 mb-2">宮嵜のライフハック</p>
+                        <p class="text-sm text-gray-300">
+                            「激痛すぎて脂汗止まらなかったけど、終わったあとエンドルフィン出まくり」<br>
+                            リストカットと同等の効果が得られるとの説。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+             <div class="content-card life bg-wcp-card rounded-2xl overflow-hidden border border-white/5 shadow-xl">
+                <div class="p-6">
+                    <h3 class="text-lg font-bold text-white mb-2">
+                        <span class="material-symbols-outlined align-middle mr-1">train</span>
+                        東京→博多 5時間の刑
+                    </h3>
+                    <p class="text-sm text-gray-400">
+                        高石、初の東京→博多新幹線移動。「5時間はいかれ」「バーとか欲しい」との嘆き。
+                        <br><br>
+                        <span class="text-gray-500 text-xs">関連ワード: ナチドル, 舌が三笘薫モード</span>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="w-full bg-banana-yellow/10 border-y border-banana-yellow/20 mt-12 py-3 overflow-hidden">
+        <div class="whitespace-nowrap animate-marquee inline-block">
+            <span class="mx-4 text-banana-yellow font-bold">💬 QUOTE OF THE WEEK:</span>
+            <span class="mx-4 text-gray-300">"俺のベロ三笘薫モード" (高石)</span>
+            <span class="mx-4 text-gray-500">///</span>
+            <span class="mx-4 text-gray-300">"ゲイ盛しゃぶしゃぶ" (宮嵜)</span>
+            <span class="mx-4 text-gray-500">///</span>
+            <span class="mx-4 text-gray-300">"新紙幣はアドルフヒトラー" (川辺)</span>
+            <span class="mx-4 text-gray-500">///</span>
+            <span class="mx-4 text-gray-300">"うるせーっ！しねーっ！" (宮嵜)</span>
+             <span class="mx-4 text-gray-500">///</span>
+            <span class="mx-4 text-gray-300">"地球温暖化が進んでオットセイたちが苦しんでいますよ!!" (高石)</span>
+        </div>
+    </div>
+
+    <div id="schedule" class="max-w-4xl mx-auto px-4 mt-16 mb-20">
+        <div class="glass-panel rounded-3xl p-8 border border-gemini-blue/30 relative overflow-hidden">
+            <div class="absolute -top-20 -right-20 w-64 h-64 bg-gemini-blue/20 rounded-full blur-3xl"></div>
+            
+            <div class="relative z-10">
+                <h2 class="text-3xl font-black mb-8 flex items-center">
+                    <span class="material-symbols-outlined mr-3 text-4xl text-gemini-blue">calendar_month</span>
+                    Weekend Mission
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-black/40 rounded-xl p-6 border border-white/10">
+                        <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                            <span class="material-symbols-outlined mr-2">directions_car</span>
+                            Sunday Night Drive
+                        </h3>
+                        <div class="space-y-3 text-sm text-gray-300">
+                            <div class="flex justify-between border-b border-white/10 pb-2">
+                                <span>Date</span>
+                                <span class="font-bold text-white">今週日曜 (夜)</span>
+                            </div>
+                            <div class="flex justify-between border-b border-white/10 pb-2">
+                                <span>Time</span>
+                                <span class="font-bold text-white">夕方〜夜集合</span>
+                            </div>
+                            <div class="flex justify-between border-b border-white/10 pb-2">
+                                <span>Location</span>
+                                <span class="font-bold text-white">博多・天神エリア</span>
+                            </div>
+                            <div class="flex justify-between pt-2">
+                                <span>Activity</span>
+                                <span class="font-bold text-white">飯 & ドライブ & 温泉?</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 h-32 rounded-lg overflow-hidden relative">
+                             <img src="https://placehold.co/400x200/1E293B/4E8CFF?text=Night+Drive" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+
+                    <div class="bg-black/40 rounded-xl p-6 border border-white/10">
+                        <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                            <span class="material-symbols-outlined mr-2">album</span>
+                            DJ Session (Year End)
+                        </h3>
+                         <div class="space-y-3 text-sm text-gray-300">
+                            <div class="flex justify-between border-b border-white/10 pb-2">
+                                <span>Target</span>
+                                <span class="font-bold text-white">年内 (12月?)</span>
+                            </div>
+                             <div class="flex justify-between border-b border-white/10 pb-2">
+                                <span>Location</span>
+                                <span class="font-bold text-white">久留米 (EV SPACE?)</span>
+                            </div>
+                            <div class="flex justify-between pt-2">
+                                <span>Equipment</span>
+                                <span class="font-bold text-gemini-blue">CDJ-3000 (Confirming)</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex justify-center items-center h-32 bg-gray-900 rounded-lg border border-gray-700">
+                            <img src="https://placehold.co/300x300/1E293B/4E8CFF?text=CDJ" class="h-full object-contain">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="max-w-7xl mx-auto px-4 py-8 text-center text-gray-600 text-xs">
+        <div class="mb-4">
+            <span class="material-symbols-outlined text-red-500 animate-pulse">warning</span>
+        </div>
+        <p>⚠️ 重复链接检测通知 ⚠️</p>
+        <p class="mt-1">人民在注视着你。我们，也在注视着你。</p>
+        <p class="mt-4 text-gray-700">WCP 3.0 Pro Generated Digest. Powered by Gemini 3.0 Concept.</p>
+    </footer>
+
+    <script>
+        // Simple Filtering Logic
+        function filterContent(category) {
+            const cards = document.querySelectorAll('.content-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            // Reset buttons
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-white/20', 'text-white');
+                btn.classList.add('text-gray-400');
+            });
+            
+            // Highlight active button (this is a simplified logic)
+            event.target.classList.remove('text-gray-400');
+            event.target.classList.add('bg-white/20', 'text-white');
+
+            cards.forEach(card => {
+                if (category === 'all') {
+                    card.style.display = 'block';
+                    setTimeout(() => card.style.opacity = '1', 50);
+                } else {
+                    if (card.classList.contains(category)) {
+                        card.style.display = 'block';
+                        setTimeout(() => card.style.opacity = '1', 50);
+                    } else {
+                        card.style.opacity = '0';
+                        setTimeout(() => card.style.display = 'none', 300);
+                    }
+                }
+            });
+        }
+
+        // Initial Setup
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set initial active state for 'All' button
+            const allBtn = document.querySelector('button[onclick="filterContent(\'all\')"]');
+            if(allBtn) {
+                allBtn.classList.remove('text-gray-400');
+                allBtn.classList.add('bg-white/20', 'text-white');
+            }
+        });
+    </script>
+
+</body>
+</html>
